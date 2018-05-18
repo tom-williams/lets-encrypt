@@ -1,0 +1,55 @@
+
+server:
+  rootPath: /api/*
+  applicationContextPath: /
+  applicationConnectors:
+    - type: http
+      port: 9090
+    - type: https
+      port: 9443
+      keyStorePath: ./path/tobe/overwritten
+      keyStorePassword: 123456
+      keyStoreType: BKS
+      keyStoreProvider: BC
+      certAlias: LocalDomainLetsEncryptKeys
+      trustStorePath: ${JAVA_HOME}\jre\lib\security\cacerts
+      trustStoreProvider: SUN
+      trustStorePassword: changeit
+      trustStoreType: JKS
+
+  adminConnectors:
+    - type: http
+      port: 9092
+
+logging:
+  level: INFO
+  loggers:
+    com.imotions: DEBUG
+
+publicS3Url: http://localhost:9000/test/
+
+s3:
+  # minio standard configuration password -- if you run a minio docker container.
+  accessKeyId: 9BR5SBGF1C46QCQ1O29F
+  secretKey: pUIBfrpCMGOQlYUQGmFphFLwKyek6TeJJliGNWam
+  bucket: test
+  endpoint: http://localhost:9000
+
+letsEncrypt:
+  domainName: devimodev.localtunnel.me
+  s3KeyStoreLocation: 83912a6d-0557-4b28-8407-c47082709830/letsencrypt/
+  domainKeyStore:
+    name: localdomain.bks
+    type: BKS
+    password: 123456
+    keyPairAlias: LocalDomainLetsEncryptKeys
+    keyPairAliasPassword: 123456
+  accountKeyStore:
+    name: localaccount.bks
+    type: BKS
+    password: 789012
+    keyPairAlias: LocalAccountLetsEncryptKeys
+    keyPairAliasPassword: 789012
+  accountURI: https://acme-staging.api.letsencrypt.org/acme/reg/5177378
+  #acmeServer: acme://letsencrypt.org/staging
+  acmeServer: https://acme-staging.api.letsencrypt.org/directory
