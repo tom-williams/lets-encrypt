@@ -9,5 +9,5 @@ How to start the Lets Encrypt application
 
 Health Check
 ---
-
+TODO: write the important stuff
 To see your applications health enter url `http://localhost:8081/healthcheck`
